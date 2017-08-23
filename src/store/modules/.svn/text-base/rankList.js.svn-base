@@ -1,0 +1,94 @@
+import * as types from './../types.js'
+import router from './../../router'
+
+const state = {
+  ranklistShow: -1, // 排行榜首页列表展开互斥
+  listClassify_baseData: [], // 银行排行榜数据
+  listClassify_totalPage: '', // 银行排行榜分页总计页数
+}
+
+const getters = {
+  ranklistShow: state => state.ranklistShow,
+  listClassify_baseData: state => state.listClassify_baseData,
+  listClassify_totalPage: state => state.listClassify_totalPage,
+}
+
+const actions = {
+  // 跳转到排行榜产品页面跳转数据处理
+  CLASSIFY_LIST_LINK({
+    commit
+  }, res) {
+    commit(types.CLASSIFY_LIST_LINK, res)
+  },
+  // 排行榜首页列表展开按钮的互斥
+  RANKLIST_SHOW({
+    commit
+  }, res) {
+    commit(types.RANKLIST_SHOW, res);
+  },
+  // 银行排行榜数据
+  LISTCLASSIFY_BASEDATA({
+    commit
+  }, res) {
+    commit(types.LISTCLASSIFY_BASEDATA, res);
+  }
+}
+
+const mutations = {
+  // 跳转到排行榜产品页面跳转数据处理
+  [types.CLASSIFY_LIST_LINK](state, res) {
+    switch (res.area) {
+      case 'product':
+        {
+          let drawing = {
+            'Title': ['直银宝', '理财产品', '纯债基金'],
+            'detailTitle': [
+              ['万份收益', '七日年化', '关注度'],
+              ['理财期限', '预期年化收益', '关注度'],
+              ['累计净值', '近三个月涨幅', '单位净值']
+            ]
+          }
+          sessionStorage.setItem('classifyDetail', JSON.stringify(drawing))
+          router.push('/ranklist/classifyList/' + res.key)
+        }
+        break
+      case 'marketing':
+        {
+          let drawing = {
+            'Title': '新 • 爆款',
+            'detailTitle': ['新手专享', '爆款', '新品']
+          }
+          sessionStorage.setItem('classifyDetail', JSON.stringify(drawing))
+          // 跳转到营销页面
+          router.push('/ranklist/vipClient/marketing?genre=' + res.key)
+        }
+        break
+      case 'VIP':
+        {
+          let drawing = {
+            'Title': '会员产品',
+            'detailTitle': ['推荐', '关注', '已购的']
+          }
+          sessionStorage.setItem('classifyDetail', JSON.stringify(drawing))
+          // 跳转到会员页面
+          router.push('/ranklist/vipClient/VIP?genre=' + res.key)
+        }
+        break
+    }
+  },
+  [types.RANKLIST_SHOW](state, res) {
+    state.ranklistShow = res;
+  },
+  [types.LISTCLASSIFY_BASEDATA](state, res) {
+    for (let name in res) {
+      state[name] = res[name];
+    }
+  }
+}
+
+export default {
+  state,
+  actions,
+  getters,
+  mutations
+}

@@ -1,0 +1,50 @@
+import * as types from './../types.js'
+
+const state = {
+  finanPageNo: [],            // 理财圈资讯列表页码
+  finanTotalPage: [],         // 理财圈资讯详情的总共页数
+  finanStoreArr: [],          // 理财圈资讯列表数据
+  finanClassIndex: 0,         // 理财圈资讯列表的默认选中项
+  finanOnce: true,            // 理财圈资讯详情是否是二次加载
+  finanSavePositionArr: [],   // 资讯圈资讯列表滚动位置的记录
+}
+
+const getters = {
+  finanPageNo: state => state.finanPageNo,
+  finanStoreArr: state => state.finanStoreArr,
+  finanClassIndex: state => state.finanClassIndex,
+  finanTotalPage: state => state.finanTotalPage,
+  finanOnce: state => state.finanOnce,
+  SAVE_POSITION: state => state.SAVE_POSITION,
+  finanSavePositionArr: state => state.finanSavePositionArr,
+}
+
+const actions = {
+  FINAN_UPDATA_LIST({commit}, res) {
+    commit(types.FINAN_UPDATA_LIST, res);
+  },
+  // 资讯列表滚动位置的记录数组
+  FINAN_SAVE_POSITION_ARR({commit}, res) {
+    commit(types.FINAN_SAVE_POSITION_ARR, res);
+  }
+}
+
+const mutations = {
+  [types.FINAN_UPDATA_LIST] (state, res) { 
+    for(let name in res) {
+      state[name] = res[name];
+    }
+    state.finanOnce = false;
+  },
+  // 资讯圈资讯列表滚动位置的记录
+  [types.FINAN_SAVE_POSITION_ARR] (state, res) {
+    state.finanSavePositionArr = res;
+  }
+}
+
+export default {
+  state,
+  actions,
+  getters,
+  mutations
+}

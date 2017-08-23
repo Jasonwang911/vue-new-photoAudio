@@ -1,0 +1,28 @@
+// 组装模块并导出 store 的文件
+import Vuex from 'vuex'
+import Vue from 'vue'
+
+import financial from './modules/financial';
+import mine from './modules/mine';
+import club from './modules/club';
+import common from './modules/common';
+import rankList from './modules/rankList';
+import profit from './modules/profit';
+import investment from './modules/investment';
+
+import createLogger from 'vuex/dist/logger'
+
+Vue.use(Vuex);
+// 导出需要的模块
+export default new Vuex.Store({
+  modules: {
+    common,
+    financial,
+    rankList,
+    profit,
+    investment,
+    club,
+    mine
+  },
+  plugins: [createLogger()]
+});

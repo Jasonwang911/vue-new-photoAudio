@@ -1,0 +1,125 @@
+import * as types from './../types.js'
+import common from './common'
+
+const state = {
+  investment: {
+    'PHONE_NUM': '',
+    'HEAD_ING_URL': '',
+    'OTHER_NAME': '',
+    'ALL_INVEST_TOTAL_AMT': 0,
+    'ALL_ADD_AMT': 0,
+    'ALL_YTD_HAPPEN_AMT': 0,
+    'mf_invest_info': {
+      'MF_ALL_INVEST_TOTAL_AMT': 0,
+      'MF_ALL_ADD_AMT': 0,
+      'MF_ALL_NOW_ADD_AMT': 0,
+      'MF_ALL_TOTAL_AMT': 0,
+      'STROKE_COUNT': 0
+    },
+    'fi_invest_info': {
+      'FI_ALL_INVEST_TOTAL_AMT': 0,
+      'FI_ALL_ADD_AMT': 0,
+      'FI_ALL_NOW_ADD_AMT': 0,
+      'BF_ALL_TOTAL_AMT': 0,
+      'STROKE_COUNT': 0
+    },
+    'bf_invest_info': {
+      'BF_ALL_INVEST_TOTAL_AMT': 0,
+      'BF_ALL_ADD_AMT': 0,
+      'BF_ALL_NOW_ADD_AMT': 0,
+      'BF_ALL_TOTAL_AMT': 0,
+      'STROKE_COUNT': 0
+    }
+  },
+  unLoginInvestment: {
+    'PHONE_NUM': '',
+    'HEAD_ING_URL': '',
+    'OTHER_NAME': '',
+    'ALL_INVEST_TOTAL_AMT': 0,
+    'ALL_ADD_AMT': 0,
+    'ALL_YTD_HAPPEN_AMT': 0,
+    'mf_invest_info': {
+      'MF_ALL_INVEST_TOTAL_AMT': 0,
+      'MF_ALL_ADD_AMT': 0,
+      'MF_ALL_NOW_ADD_AMT': 0,
+      'MF_ALL_TOTAL_AMT': 0,
+      'STROKE_COUNT': 0
+    },
+    'fi_invest_info': {
+      'FI_ALL_INVEST_TOTAL_AMT': 0,
+      'FI_ALL_ADD_AMT': 0,
+      'FI_ALL_NOW_ADD_AMT': 0,
+      'BF_ALL_TOTAL_AMT': 0,
+      'STROKE_COUNT': 0
+    },
+    'bf_invest_info': {
+      'BF_ALL_INVEST_TOTAL_AMT': 0,
+      'BF_ALL_ADD_AMT': 0,
+      'BF_ALL_NOW_ADD_AMT': 0,
+      'BF_ALL_TOTAL_AMT': 0,
+      'STROKE_COUNT': 0
+    }
+  }
+}
+
+const getters = {
+  personalInvestment: state => {
+    if (common.state.token == '' || common.state.token == null) {
+      return state.unLoginInvestment
+    } else {
+      if (beJson(state.investment.mf_invest_info)) {
+        state.investment.mf_invest_info = state.unLoginInvestment.mf_invest_info
+      }
+      if (beJson(state.investment.fi_invest_info)) {
+        state.investment.fi_invest_info = state.unLoginInvestment.fi_invest_info
+      }
+      if (beJson(state.investment.bf_invest_info)) {
+        state.investment.bf_invest_info = state.unLoginInvestment.bf_invest_info
+      }
+      return state.investment
+    }
+  }
+}
+
+const actions = {
+  PERSONAL_INVESTMENT ({
+    commit
+  }, res) {
+    commit(types.PERSONAL_INVESTMENT, res)
+  }
+}
+
+const mutations = {
+  [types.PERSONAL_INVESTMENT] (state, res) {
+    state.investment = res
+  }
+}
+
+export default {
+  state,
+  actions,
+  getters,
+  mutations
+}
+
+// 检测json是否为 {}
+function beJson (json) {
+  let keyArr = []
+  for (let key in json) {
+    keyArr.push(key)
+  }
+  if (keyArr.length == 0) {
+    return true
+  } else {
+    return false
+  }
+}
+// 检测json中字段是否为null
+function isNull (json) {
+  for (let name in json) {
+    if (json[name] == null) {
+      jsone[name] = 0
+    }
+  }
+  return json
+}

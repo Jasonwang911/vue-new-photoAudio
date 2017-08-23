@@ -1,0 +1,500 @@
+import * as types from './../types.js';
+
+const state = {
+  // 从详情页跳转到比收益保存的ID
+  Detail_Id: '',
+  // 比收益用户输入的金额
+  profitMoney: 30000,
+  // 开始时间和结束时间的毫秒数
+  startDate_MS: '',
+  endDate_MS: '',
+  // 比收益的时间差（天）
+  time_apart: Number,
+  // 活期和余额宝数据
+  tacitly_list: [{
+      LOGO_URL: require('./../../assets/profit/zhifubao.png'),
+      PRD_NAME: '余额宝',
+      ORG_NAME: '支付宝',
+      RATE: '',
+      PRD_ID: -1,
+      PRD_TYPE_ID: 1,
+      benefit: ''
+    },
+    {
+      LOGO_URL: require('./../../assets/profit/huoqi.png'),
+      PRD_NAME: '活期',
+      ORG_NAME: '标准银行',
+      RATE: '',
+      PRD_ID: -2,
+      PRD_TYPE_ID: 1,
+      benefit: ''
+    }
+  ],
+  // 推荐列表
+  recomm_list: [],
+  // 关注列表数据数组
+  concern_list: [],
+  // 货币基金数据数组
+  fund_list: [],
+  // 理财产品的数组
+  finance_list: [],
+  // 货基类别全部数据
+  fund_finance_list: [],
+  // 纯债数据数组
+  bond_list: [],
+  // 用户添加产品中  页面显示的列表
+  profitData_list: [],
+  // 添加产品的列表
+  profitList: [],
+  // 预计添加产品的列表
+  willChoose: [],
+  // 选择产品页面的 已勾选产品的ID 数组
+  checked_list: [],
+  // 纯债页面勾选时间
+  bond_apart: 90,
+  // 纯债收益率 使用的的字段匹配
+  bond_RATE: 'RATE',
+}
+
+const getters = {
+  // 获取从详情页跳转到比收益的产品ID
+  Detail_Id: state => state.Detail_Id,
+  // 获取比收益页面用户输入的金额
+  profitMoney: state => state.profitMoney,
+  // 获取比收益开始时间和结束时间的差额日期
+  time_apart: state => state.time_apart,
+  // 获取活期和余额宝数据
+  tacitly_list: state => state.tacitly_list,
+  // 获取推荐列表
+  recomm_list: state => state.recomm_list,
+  // 获取关注列表
+  concern_list: state => state.concern_list,
+  // 获取 货基-理财列表
+  fund_finance_list: state => state.fund_finance_list,
+  // 获取货币基金列表
+  fund_list: state => state.fund_list,
+  // 获取 理财产品列表
+  finance_list: state => state.finance_list,
+  // 获取 纯债产品列表
+  bond_list: state => state.bond_list,
+  // 用户添加产品中  页面显示的列表
+  profitData_list: state => state.profitData_list,
+  //  获取勾选列表
+  checked_list: state => state.checked_list,
+  // 添加产品的列表
+  profitList: state => state.profitList,
+  // 预计添加产品列表
+  willChoose: state => state.willChoose,
+  // 比收益页面勾选时间
+  bond_apart: state => state.bond_apart,
+  // 比收益纯债 时间选择按钮
+  bond_RATE: state => state.bond_RATE,
+}
+
+const actions = {
+  // 比收益开始时间和结束时间的差额日期的存储
+  TIME_APART({
+    commit
+  }, res) {
+    commit(types.TIME_APART, res);
+  },
+  // 保存比收益输入的金额
+  CHANGE_MONEY({
+    commit
+  }, res) {
+    if (res >= 0 && res != null && res != '') {
+      commit(types.CHANGE_MONEY, res);
+    }
+  },
+  // 初始化日期和活期余额宝数据
+  DATE_INIT({
+    commit
+  }, res) {
+    commit(types.DATE_INIT, res);
+  },
+  // 更新开始日期
+  START_DATE({
+    commit
+  }, res) {
+    commit(types.START_DATE, res);
+  },
+  // 更新结束日期
+  END_DATE({
+    commit
+  }, res) {
+    commit(types.END_DATE, res);
+  },
+  // 纯债 时间选择
+  BOND_APART({
+    commit
+  }, res) {
+    commit(types.BOND_APART, res);
+  },
+  // 活期和余额宝数据更新
+  TACITLY_LIST({
+    commit
+  }, res) {
+    commit(types.TACITLY_LIST, res);
+  },
+  // 推荐列表的数据
+  RECOMM_LIST({
+    commit
+  }, res) {
+    commit(types.RECOMM_LIST, res);
+  },
+  // 关注列表的数据
+  CONCERN_LIST({
+    commit
+  }, res) {
+    commit(types.CONCERN_LIST, res);
+  },
+  // 货基-理财产品列表数据
+  FUND_FINANCE_LIST({
+    commit
+  }, res) {
+    commit(types.FUND_FINANCE_LIST, res);
+  },
+  // 货基产品列表
+  FUND_LIST({
+    commit
+  }, res) {
+    commit(types.FUND_LIST, res);
+  },
+  // 理财产品列表
+  FINANCE_LIST({
+    commit
+  }, res) {
+    commit(types.FINANCE_LIST, res);
+  },
+  // 纯债产品列表
+  BOND_LIST({
+    commit
+  }, res) {
+    commit(types.BOND_LIST, res);
+  },
+  // 切换 显示列表
+  CHOOSE_SHOW_LIST({
+    commit
+  }, res) {
+    commit(types.CHOOSE_SHOW_LIST, res);
+  },
+  // 添加产品列表
+  PROFIT_LIST({
+    commit
+  }, res) {
+    commit(types.PROFIT_LIST, res);
+  },
+  // 预计添加产品列表
+  WILL_CHOOSE({
+    commit
+  }, res) {
+    commit(types.WILL_CHOOSE, res);
+  },
+  // 删除比收益列表
+  DELETE_PROFIT({
+    commit
+  }, res) {
+    commit(types.DELETE_PROFIT, res);
+  },
+  // 添加产品的勾选状态的 action
+  CHOOSE_STATE({
+    commit
+  }, res) {
+    commit(types.CHOOSE_STATE, res);
+  }
+}
+
+const mutations = {
+  // 比收益开始时间和结束时间的差额日期的存储
+  [types.TIME_APART](state, res) {
+    state.time_apart = res;
+  },
+  // 比收益存入的金额
+  [types.CHANGE_MONEY](state, res) {
+    state.profitMoney = res;
+    updateList();
+  },
+  // 日期的初始化和余额宝、活期数据初始化
+  [types.DATE_INIT](state, res) {
+    state.startDate_MS = Date_to_MS(res.start);
+    state.endDate_MS = Date_to_MS(res.end);
+    state.tacitly_list[1].RATE = res.huoqi;
+    state.tacitly_list[0].RATE = res.yuerbao;
+    let time = (state.endDate_MS - state.startDate_MS) / 86400;
+    state.time_apart = Math.floor(time);
+    // 初始化 用户操作列表中 页面显示的 列表
+    state.profitData_list = state.fund_finance_list.concat();
+    state.tacitly_list = arrSort(state.tacitly_list);
+  },
+  // 开始日期的处理
+  [types.START_DATE](state, res) {
+    let state_MS = Date_to_MS(res);
+    let time = Number(state.endDate_MS) - Number(state_MS);
+    let time_apart = Math.floor(time / 86400);
+    // 将时间差保存到vuex
+    if (time_apart > 0) {
+      state.startDate_MS = Date_to_MS(res);
+      state.time_apart = time_apart;
+      sessionStorage.setItem('time_apart', time_apart);
+      updateList();
+    } else if (time_apart <= 0 && time_apart && this.endDate_MS != '') {
+      alert('请正确选择日期');
+    }
+  },
+  // 结束日期的处理
+  [types.END_DATE](state, res) {
+    let end_MS = Date_to_MS(res);
+    let time = Number(end_MS) - Number(state.startDate_MS);
+    let time_apart = Math.floor(time / 86400);
+    // 将时间差保存到vuex
+    if (time_apart > 0) {
+      state.endDate_MS = Date_to_MS(res);
+      state.time_apart = time_apart;
+      sessionStorage.setItem('time_apart', time_apart);
+      updateList();
+    } else if (time_apart <= 0 && time_apart && state.startDate_MS != '') {
+      alert('结束日期不能小于开始日期');
+    };
+  },
+  // 纯债 时间的处理
+  [types.BOND_APART](state, res) {
+    switch (res) {
+      case 0:
+        state.bond_apart = 90;
+        state.bond_RATE = 'RATE';
+        break;
+      case 1:
+        state.bond_apart = 180;
+        state.statebond_RATE = 'RATE2';
+        break;
+      case 2:
+        state.bond_apart = 365;
+        state.bond_RATE = 'RATE3';
+        break;
+      default:
+        state.bond_apart = 90;
+        state.bond_RATE = 'RATE';
+        break;
+    }
+    updateList();
+  },
+  // 活期和余额宝数据处理
+  [types.TACITLY_LIST](state, res) {
+    state.tacitly_list = arrSort(res);
+  },
+  // 推荐列表的处理
+  [types.RECOMM_LIST](state, res) {
+    state.recomm_list = arrSort(res);
+  },
+  // 关注列表的处理
+  [types.CONCERN_LIST](state, res) {
+    state.concern_list = arrSort(res);
+  },
+  // 货基-理财列表数据处理
+  [types.FUND_FINANCE_LIST](state, res) {
+    state.fund_finance_list = arrSort(res);
+  },
+  // 货币基金列表数据处理
+  [types.FUND_LIST](state, res) {
+    state.fund_list = arrSort(res);
+  },
+  // 理财产品数据列表
+  [types.FINANCE_LIST](state, res) {
+    state.finance_list = arrSort(res);
+  },
+  // 纯债产品数据列表
+  [types.BOND_LIST](state, res) {
+    state.bond_list = arrSort(res);
+    // state.bond_list.concat(res);
+  },
+  // 切换显示列表
+  [types.CHOOSE_SHOW_LIST](state, res) {
+    state.profitData_list.splice(0, state.profitData_list.length);
+    switch (res) {
+      case 'fund_finance':
+        changeType_Tacitly(1)
+        state.profitData_list = state.fund_finance_list.concat();
+        break;
+      case 'fund':
+        changeType_Tacitly(1)
+        state.profitData_list = state.fund_list.concat();
+        break;
+      case 'finance':
+        changeType_Tacitly(1)
+        state.profitData_list = state.finance_list.concat();
+        break;
+      case 'bond':
+        changeType_Tacitly(2)
+        state.profitData_list = state.bond_list.concat();
+        break;
+    }
+  },
+  // 添加产品列表
+  [types.PROFIT_LIST](state, res) {
+    state.profitList = res;
+  },
+  // 预计添加产品列表   res = {status: 'add', ID: this.item.ID, item: this.item}
+  [types.WILL_CHOOSE](state, res) {
+    switch (res.status) {
+      case 'add':
+        // 将产品添加进 预选数组
+        state.willChoose.push(res.item);
+        break;
+      case 'reduce':
+        if (!Array.indexOf) {
+          Array.prototype.indexOf = function(el) {
+            for (var i = 0, n = this.length; i < n; i++) {
+              if (this[i] === el) {
+                return i;
+              }
+            }
+            return -1;
+          }
+        }
+        // 需要删除json数据在对应数组中的索引
+        let index = state.willChoose.indexOf(res.ID);
+        state.willChoose.splice(index, 1);
+        break;
+    }
+  },
+  // 删除列表功能
+  [types.DELETE_PROFIT](state, res) {
+    if (!Array.indexOf) {
+      Array.prototype.indexOf = function(el) {
+        for (var i = 0, n = this.length; i < n; i++) {
+          if (this[i] === el) {
+            return i;
+          }
+        }
+        return -1;
+      }
+    }
+    // 需要删除json数据在对应数组中的索引
+    let index = state[res.list].indexOf(chooseJson(res.ID, state[res.list]));
+    state[res.list].splice(index, 1);
+  },
+  // 添加产品页面的产品勾选产品的ID数组
+  [types.CHOOSE_STATE](state, res) {
+    switch (res.status) {
+      case 'add':
+        {
+          state.checked_list.push(res.ID);
+        }
+        break;
+      case 'reduce':
+        if (!Array.indexOf) {
+          Array.prototype.indexOf = function(el) {
+            for (var i = 0, n = this.length; i < n; i++) {
+              if (this[i] === el) {
+                return i;
+              }
+            }
+            return -1;
+          }
+        }
+        // 需要删除json数据在对应数组中的索引
+        let index = state.checked_list.indexOf(res.ID);
+        state.checked_list.splice(index, 1);
+        break;
+    }
+  }
+}
+
+export default {
+  state,
+  actions,
+  getters,
+  mutations
+}
+
+// 公用函数
+/* 更新列表 */
+function updateList() {
+  // 更新  理财部分三个列表 收益
+  state.fund_list = arrSort(state.fund_list);
+  state.finance_list = arrSort(state.finance_list);
+  state.fund_finance_list = arrSort(state.fund_finance_list);
+  // 更新  纯债列表 数据
+  state.bond_list = arrSort(state.bond_list);
+  // 更新页面显示列表
+  state.profitData_list = arrSort(state.profitData_list);
+  // 更新 余额宝、活期 列表收益
+  state.tacitly_list = arrSort(state.tacitly_list);
+  // 更新 推荐列表  收益
+  state.recomm_list = arrSort(state.recomm_list);
+  // 更新 关注列表 收益
+  state.concern_list = arrSort(state.concern_list);
+};
+// 理财--纯债 切换时更改余额宝、活期时间选项   1表示 理财； 2表示纯债
+function changeType_Tacitly(type) {
+  if (type == 1) {
+    state.tacitly_list[0].PRD_TYPE_ID = 1;
+    state.tacitly_list[1].PRD_TYPE_ID = 1;
+    state.tacitly_list = arrSort(state.tacitly_list);
+  } else if (type == 2) {
+    state.tacitly_list[0].PRD_TYPE_ID = 3;
+    state.tacitly_list[1].PRD_TYPE_ID = 3;
+    state.tacitly_list = arrSort(state.tacitly_list);
+  }
+};
+/* 日期格式转为时间戳函数 */
+function Date_to_MS(input) {
+  let str = input.replace(/\-/g, '/');
+  let oDate = new Date(str);
+  let MS = oDate.getTime() / 1000;
+  return MS;
+};
+/*  json数据数组去重 */
+function findInArr(arr) {
+  let resArr = [arr[0]];
+  for (let i = 0; i < arr.length; i++) {
+    let repeat = false;
+    let arrItem = arr[i];
+    for (let j = 0; j < resArr.length; j++) {
+      if (arrItem.PRD_ID == resArr[j].PRD_ID) {
+        repeat = true;
+        break;
+      }
+    }
+    if (!repeat) {
+      resArr = resArr.concat(arrItem);
+    }
+  }
+  return resArr;
+}
+/* 更新收益率并根据收益率进行排序函数 */
+function arrSort(res) {
+  if (res.length == 0) {
+    return res;
+  }
+  // 更新 收益项
+  for (let i = 0; i < res.length; i++) {
+    if (res[i].PRD_TYPE_ID == 1 || res[i].PRD_TYPE_ID == 2) {
+      res[i].benefit = state.profitMoney * Number(res[i].RATE) / 100 * state.time_apart / 365;
+    } else if (res[i].PRD_TYPE_ID == 3) {
+      if (res[i].PRD_ID == -1 || res[i].PRD_ID == -2 || res[i][state.bond_RATE] == undefined) {
+        // res[i].benefit = state.profitMoney * Number(res[i].RATE) / 100 * (state.bond_apart / 30) / 12;
+        res[i].benefit = state.profitMoney * Number(res[i].RATE) / 100 / 365 * state.bond_apart;
+      } else {
+        // res[i].benefit = state.profitMoney * Number(res[i][state.bond_RATE]) / 100 * (state.bond_apart / 30) / 12;
+        res[i].benefit = state.profitMoney * Number(res[i][state.bond_RATE]) / 100;
+      }
+    }
+  }
+  // 去除重复ID的数据
+  res = findInArr(res);
+  // 对比收益列表进行收益金额从大到小的排序
+  function sortBenfit(a, b) {
+    return b.RATE - a.RATE
+  }
+  let arr = res.sort(sortBenfit);
+  return arr;
+};
+// 根据json中的ID查找数组中json数据
+function chooseJson(input, arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].ID == input) {
+      return arr[i];
+    }
+  }
+};

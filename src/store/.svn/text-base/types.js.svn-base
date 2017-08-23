@@ -1,0 +1,91 @@
+// 手册登陆保存  
+export const SESSION_ID = 'SESSION_ID';
+export const GET_BASE_API = 'GET_BASE_API';
+// 微信分享标题和描述相关操作
+export const WX_SHARE_MSG = 'WX_SHARE_MSG';
+// 保存滚动位置 
+export const SAVE_POSITION = 'SAVE_POSITION';
+// 选择从vuex中读取数据还是从组件内部获取数据 
+export const DATA_FROM_VUEX = 'DATA_FROM_VUEX';
+// 理财圈资讯列表的滚动位置 
+export const FINAN_SAVE_POSITION_ARR = 'FINAN_SAVE_POSITION_ARR';
+// 首页抽奖活动类型
+export const LOTTERY_ID = 'LOTTERY_ID';
+// 理财圈资讯列表加载数据 
+export const FINAN_UPDATA_LIST = 'FINAN_UPDATA_LIST';
+// 理财圈资讯列表数据初始化 
+export const FINAN_LIST_INIT = 'FINAN_LIST_INIT';
+// 请求数据时的加载loading
+export const FETCH_LOADING = 'FETCH_LOADING';
+// 公用组件 footer 的显示状态 
+export const FOOTER_STATE = 'FOOTER_STATE';
+// 排行榜产品板块跳转链接
+export const CLASSIFY_LIST_LINK = 'CLASSIFY_LIST_LINK';
+// 排行榜首页的列表展开额互斥 RANKLIST_SHOW
+export const RANKLIST_SHOW = 'RANKLIST_SHOW';
+// 排行榜银行排行数据存储 
+export const LISTCLASSIFY_BASEDATA = 'LISTCLASSIFY_BASEDATA';
+// 购买电影的ID
+export const STORE_MOVIE_ID = 'STORE_MOVIE_ID';
+//登陆后的TOKEN
+export const STORE_TOKEN = 'STORE_TOKEN';
+// 页面跳转钩子函数的页面来源 FROM_PATH
+export const FROM_PATH = 'FROM_PATH';
+// 页面跳转钩子函数的页面去处 TO_PATH
+export const TO_PATH = 'TO_PATH';
+// 登陆后购买电影票的总价
+export const MOVIE_TICKET_TOTAL_PRICE = 'MOVIE_TICKET_TOTAL_PRICE';
+// 记录电影的场次信息
+export const MOVIE_PARITY_ID = 'MOVIE_PARITY_ID';
+// 电影票的购买数量
+export const TOTAL_NUM = 'TOTAL_NUM';
+// 登陆后保存手机号
+export const STORE_MOBILE = 'STORE_MOBILE';
+// 比收益开始时间和结束时间的差额日期的存储
+export const TIME_APART = 'TIME_APART';
+// 比收益输入的金额
+export const CHANGE_MONEY = 'CHANGE_MONEY';
+// 比收益日期初始化 DATE_INIT
+export const DATE_INIT = 'DATE_INIT';
+// 比收益开始日期
+export const START_DATE = 'START_DATE';
+// 比收益结束时间的选择
+export const END_DATE = 'END_DATE';
+// 浮层型返回按钮的给父组件的传值
+export const BACK_ICON = 'BACK_ICON';
+// 比收益中活期和余额宝数据列表
+export const TACITLY_LIST = 'TACITLY_LIST';
+// 比收益中推荐列表
+export const RECOMM_LIST = 'RECOMM_LIST';
+// 比收益中关注列表
+export const CONCERN_LIST = 'CONCERN_LIST';
+// 比收益中货基-理财列表
+export const FUND_FINANCE_LIST = 'FUND_FINANCE_LIST';
+// 比收益中货币基金列表
+export const FUND_LIST = 'FUND_LIST';
+// 比收益理财产品列表
+export const FINANCE_LIST = 'FINANCE_LIST';
+// 比收益纯债产品列表
+export const BOND_LIST = 'BOND_LIST';
+// 比收益 切换显示列表
+export const CHOOSE_SHOW_LIST = 'CHOOSE_SHOW_LIST';
+// 比收益添加产品列表
+export const PROFIT_LIST = 'PROFIT_LIST';
+// 比收益预计添加产品列表 WILL_CHOOSE
+export const WILL_CHOOSE = 'WILL_CHOOSE';
+// 删除比收益列表 DELETE_PROFIT
+export const DELETE_PROFIT = 'DELETE_PROFIT';
+// 比收益中 添加产品页面的产品勾选状态 CHOOSE_STATE
+export const CHOOSE_STATE = 'CHOOSE_STATE';
+// 比收益中 纯债时间的切换
+export const BOND_APART = 'BOND_APART';
+// 我的投资 保存个人投资总列表
+export const PERSONAL_INVESTMENT = 'PERSONAL_INVESTMENT';
+// 首页抽奖大图标显示状态
+export const LOTTERY_INDEX_BIG = 'LOTTERY_INDEX_BIG';
+// 我的板块中 中奖记录显示状态
+export const AWARD_SHOW = 'AWARD_SHOW';
+// 抽奖页面分享后保存抽奖次数
+export const LOTTERY_COUNT = 'LOTTERY_COUNT';
+// 抽奖结果状态
+export const RESULT_TYPE = 'RESULT_TYPE';

@@ -1,0 +1,129 @@
+import api from './../../fetch/api';
+import * as types from './../types.js';
+import common from './common';
+
+// state 是vuex 保存数据的，就相当于vue里的data
+const state = {
+  // 首页抽奖类型ID
+  lottery_id: Number,
+  // 首页抽奖大图标显示状态
+  lotteryIndexBig: false,
+  // 中奖纪录显示状态
+  awardShow: false,
+  // 抽奖次数
+  lotteryCount: 0,
+  // 抽奖分享次数
+  lotteryShareCount: 0,
+  // 是否显示分享增加抽奖机会
+  bShare: true,
+  // 是否允许抽奖
+  stopRotate: false,
+  // 抽奖结果显示状态
+  resultType: false,
+  errno: 1,
+  msg: {}
+}
+// 从state里获取数据给组件
+const getters = {
+  awardShow: state => state.awardShow,
+  // 抽奖次数
+  lotteryCount: state => state.lotteryCount,
+  // 抽奖分享次数
+  lotteryShareCount: state => state.lotteryShareCount,
+  // 是否允许抽奖
+  stopRotate: state => state.stopRotate,
+  // 抽奖结果显示状态
+  resultType: state => state.resultType,
+  // 是否显示共享增加抽奖机会
+  bShare: state => state.bShare,
+  // 首页抽奖类型获取
+  lottery_id: state => state.lottery_id,
+  // 首页抽奖大图标显示状态
+  lotteryIndexBig: state => state.lotteryIndexBig,
+}
+// mutations 用来向state提交数据的，只能进行同步操作
+const mutations = {
+  // 中奖记录显示状态
+  [types.AWARD_SHOW](state, res) {
+    state.awardShow = res;
+  },
+  // 分享页面保存 抽奖次数 lottery_count  分享次数 lottery_share_count
+  [types.LOTTERY_COUNT](state, res) {
+    state.lotteryCount = Number(res.lottery_count);
+    state.lotteryShareCount = Number(res.lottery_share_count);
+    if (Number(res.lottery_count) < 1) {
+      state.stopRotate = true;
+    } else {
+      state.stopRotate = false;
+    }
+    if (Number(res.lottery_share_count) > 1) {
+      state.bShare = false;
+    }
+  },
+  // 抽奖结果状态
+  [types.RESULT_TYPE](state, res) {
+    state.resultType = res;
+  },
+  // 首页抽奖类型ID
+  [types.LOTTERY_ID](state, res) {
+    state.lottery_id = res;
+  },
+  // 首页抽奖大图标显示状态
+  [types.LOTTERY_INDEX_BIG](state, res) {
+    state.lotteryIndexBig = res;
+  }
+}
+// actions 用来触发mutations，action可以进行异步操作 ，在action里可以用commit提交mutations
+const actions = {
+  // 中奖记录显示状态
+  AWARD_SHOW({
+    commit
+  }) {
+    api.commonApi('/finsuitPhone/deal', 'param_key={"head":{"TYPE":"GET_DISPLAYMYLOTTERY","SESSION_ID":"' + common.state.SESSION_ID + '","TOKEN":"' + common.state.token + '","DEVICE_ID":""},"param":{}}')
+      .then(res => {
+        let type;
+        switch (res.data.myLottery) {
+          case '0':
+            commit(types.AWARD_SHOW, false);
+            break;
+          case '1':
+            commit(types.AWARD_SHOW, true);
+            break;
+          default:
+            commit(types.AWARD_SHOW, 'no state');
+            break;
+        }
+      })
+  },
+  // 保存抽奖和分享次数
+  LOTTERY_COUNT({
+    commit
+  }, res) {
+    commit(types.LOTTERY_COUNT, res);
+  },
+  // 抽奖结果状态改变
+  RESULT_TYPE({
+    commit
+  }, res) {
+    commit(types.RESULT_TYPE, res);
+  },
+  // 首页活动类型存储
+  LOTTERY_ID({
+    commit
+  }, res) {
+    commit(types.LOTTERY_ID, res);
+  },
+  // 首页抽奖大图标显示状态
+  LOTTERY_INDEX_BIG({
+    commit
+  }, res) {
+    commit(types.LOTTERY_INDEX_BIG, res);
+  }
+}
+
+export default {
+  state,
+  actions,
+  getters,
+  mutations
+}

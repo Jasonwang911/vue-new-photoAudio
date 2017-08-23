@@ -1,0 +1,101 @@
+import * as types from './../types.js'
+import { baseUrlHost } from './../../config/env'
+
+let finsuithttpUrl = document.location.protocol + '//' + document.location.host
+
+const state = {
+  // 俱乐部图片公共地址：
+  contextPathSrc: baseUrlHost + '/finsuit/down?path=',
+  // 俱乐部支付链接公共地址
+  payContextUrl: baseUrlHost + '/finsuit/clubPhone/hikeAliPayPageOverWeiXin?ORDER_NO=',
+  movieID: '',
+  movieTicketTP: Number,
+  movieParityId: '',
+  total_Num: ''
+}
+
+const actions = {
+  // 保存购买电影的ID
+  storeMovieID({
+    commit
+  }, res) {
+    commit(types.STORE_MOVIE_ID, res)
+  },
+  // 登陆后购买电影票的总价，传向付款界面
+  movieTicketTotalPrice({
+    commit
+  }, res) {
+    commit(types.MOVIE_TICKET_TOTAL_PRICE, res)
+  },
+  // 记录电影的场次信息，支付页面提交数据使用
+  moiveParityId({
+    commit
+  }, res) {
+    commit(types.MOVIE_PARITY_ID, res)
+  },
+  // 电影票的购买数量
+  totalNum({
+    commit
+  }, res) {
+    commit(types.TOTAL_NUM, res)
+  }
+}
+
+const getters = {
+  // 图片公共 src 的获取
+  getContextPathSrc: state => state.contextPathSrc,
+  // 待支付跳转地址
+  payContextUrl: state => state.payContextUrl,
+  // 获取购买电影的ID
+  movieID: state => {
+    if (state.movieID == '') {
+      return localStorage.getItem('STORE_MOVIE_ID')
+    } else {
+      return state.movieID
+    }
+  },
+  // 获取购买电影的场次
+  movieParityId: state => {
+    if (state.movieParityId == '') {
+      return localStorage.getItem('PARITY_ID')
+    } else {
+      return state.movieParityId
+    }
+  },
+  // 电影票的购买总数量
+  TotalNum: state => {
+    if (state.total_Num == '') {
+      return localStorage.getItem('total_Num')
+    } else {
+      return state.total_Num
+    }
+  },
+  // 电影票的购买总价格
+  movieTicketTP: state => state.movieTicketTP
+}
+
+const mutations = {
+  // 修改购买电影的ID
+  [types.STORE_MOVIE_ID](state, res) {
+    state.movieID = res
+  },
+  // 俱乐部购买电影票的总价，传向付款界面
+  [types.MOVIE_TICKET_TOTAL_PRICE](state, res) {
+    state.movieTicketTP = res
+  },
+  // 购买影票的场次，支付提交数据使用
+  [types.MOVIE_PARITY_ID](state, res) {
+    state.movieParityId = res
+  },
+  // 电影票的购买总数
+  [types.TOTAL_NUM](state, res) {
+    state.total_Num = res
+  }
+}
+
+export default {
+  state,
+  actions,
+  getters,
+  mutations
+}
