@@ -36,7 +36,8 @@ export default {
       audioType: '关闭背景音乐',
       baseData: [
       {IMG_URL: require('./../assets/picture/dongbaoxing.jpg')},
-      {IMG_URL: require('./../assets/picture/pashan.jpg')}
+      {IMG_URL: require('./../assets/picture/media/headLogo/zhanghongliang1.jpg')},
+      {IMG_URL: require('./../assets/picture/media/headLogo/zhangwei1.jpg')}
       ],
       mediaData: [
         {
@@ -54,6 +55,86 @@ export default {
             }],
             poster: require("./../assets/picture/media/headLogo/huchenguang.jpg"),
           },
+        },
+        {
+          name: '李银萍',
+          logoSrc: require('./../assets/picture/media/headLogo/liyinping1.jpg'),
+          testimonials: ' ：我是李银萍',
+          playerOptions: {
+            // videojs options
+            muted: false,
+            language: 'en',
+            playbackRates: [0.7, 1.0, 1.5, 2.0],
+            sources: [{
+              type: "video/mp4",
+              src: require("./../../static/liyinping.mp4")
+            }],
+            poster: require("./../assets/picture/media/headLogo/liyinping.jpg"),
+          },
+        },
+        {
+          name: '张宏亮（老大）',
+          logoSrc: require('./../assets/picture/media/headLogo/zhanghongliang.jpg'),
+          testimonials: '我是老大，老大是我',
+          playerOptions: {
+            // videojs options
+            muted: false,
+            language: 'en',
+            playbackRates: [0.7, 1.0, 1.5, 2.0],
+            sources: [{
+              type: "video/mp4",
+              src: require("./../../static/zhanghongliang.mp4")
+            }],
+            poster: require("./../assets/picture/media/headLogo/zhanghongliang1.jpg"),
+          },
+        },
+        {
+          name: '张伟',
+          logoSrc: require('./../assets/picture/media/headLogo/zhangwei.jpg'),
+          testimonials: '：我是张伟',
+          playerOptions: {
+            // videojs options
+            muted: false,
+            language: 'en',
+            playbackRates: [0.7, 1.0, 1.5, 2.0],
+            sources: [{
+              type: "video/mp4",
+              src: require("./../../static/zhangwei.mp4")
+            }],
+            poster: require("./../assets/picture/media/headLogo/zhangwei1.jpg"),
+          },
+        },
+        {
+          name: '王深',
+          logoSrc: require('./../assets/picture/media/headLogo/wangshen.jpg'),
+          testimonials: '：怀念不如相见--等你258',
+          playerOptions: {
+            // videojs options
+            muted: false,
+            language: 'en',
+            playbackRates: [0.7, 1.0, 1.5, 2.0],
+            sources: [{
+              type: "video/mp4",
+              src: require("./../../static/wangshen.mp4")
+            }],
+            poster: require("./../assets/picture/media/headLogo/wangshen1.jpg"),
+          },
+        },
+        {
+          name: '李静波（波儿）',
+          logoSrc: require('./../assets/picture/media/headLogo/lijingbo.jpg'),
+          testimonials: '曾经的已不再拥有',
+          playerOptions: {
+            // videojs options
+            muted: false,
+            language: 'en',
+            playbackRates: [0.7, 1.0, 1.5, 2.0],
+            sources: [{
+              type: "video/mp4",
+              src: require("./../../static/lijingbo.mp4")
+            }],
+            poster: require("./../assets/picture/media/headLogo/lijingbo1.jpg"),
+          }
         }
       ],
       swiper: Object
